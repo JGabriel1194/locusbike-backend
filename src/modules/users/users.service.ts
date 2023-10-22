@@ -39,7 +39,7 @@ export class UsersService {
       const password = await hashPassword(createUserDto.userPassword);
       createUserDto = {
         ...createUserDto,
-        userRol: createUserDto.userRol,
+        userAddres: createUserDto.userAddres,
         userPassword: password,
       };
       const newUser = await this.userModel.create(createUserDto);

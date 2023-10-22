@@ -23,7 +23,7 @@ export class User extends Model<User> {
   userImage: string;
 
   @Column
-  userRol: string;
+  userAddres: string;
 
   @Column({ defaultValue: true })
   isActive: boolean;

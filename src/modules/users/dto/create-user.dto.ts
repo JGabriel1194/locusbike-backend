@@ -58,10 +58,10 @@ export class CreateUserDto {
 
   @ApiProperty({
     type: 'string',
-    description: 'User role',
-    example: 'admin'
+    description: 'User addres',
+    example: 'Calle 123'
   })
-  userRol: string;
+  userAddres: string;
 
   @ApiProperty({
     type: 'boolean',

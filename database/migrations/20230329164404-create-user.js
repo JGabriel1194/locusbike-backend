@@ -27,7 +27,7 @@ module.exports = {
       userImage: {
         type: Sequelize.STRING
       },
-      userRol:{
+      userAddres:{
         type: Sequelize.STRING
       },
       isActive: {
