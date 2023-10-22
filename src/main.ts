@@ -9,7 +9,7 @@ async function bootstrap() {
 
   //Configuración de swagger
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
+    .setTitle('Locus Bike - API')
     .setDescription('The cats API description')
     .setVersion('1.0')
     .addTag('users', 'Users API')
