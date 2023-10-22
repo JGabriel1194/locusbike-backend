@@ -12,19 +12,22 @@ module.exports = {
       userName: {
         type: Sequelize.STRING
       },
-      firstName: {
+      userEmail: {
         type: Sequelize.STRING
       },
-      lastName: {
+      userPassword: {
         type: Sequelize.STRING
       },
-      email: {
+      userCedula: {
         type: Sequelize.STRING
       },
-      password: {
+      userPhone: {
         type: Sequelize.STRING
       },
-      userRoles:{
+      userImage: {
+        type: Sequelize.STRING
+      },
+      userRol:{
         type: Sequelize.STRING
       },
       isActive: {

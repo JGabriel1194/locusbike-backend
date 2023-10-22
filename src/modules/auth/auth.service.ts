@@ -5,6 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 import { customResponse } from 'src/helpers/customResponse';
 import { Response } from 'express';
 import { checkPassword } from '../../helpers/password';
+import { json } from 'sequelize';
 @Injectable()
 export class AuthService {
   constructor(
@@ -15,16 +16,14 @@ export class AuthService {
   async signIn(signInDto: SignInDto, res: Response) {
     try {
       //Verify if user exist
-      const user = await this.usersService.findOneByUserName(
-        signInDto.username,
-      );
+      const user = await this.usersService.findByEmail(signInDto.userEmail);
 
       if (!user) {
         return customResponse(res, 404, 'Usuario no encontrado', null);
       }
 
       //Verify if password is correct
-      const isMatch = await checkPassword(signInDto.password, user.password);
+      const isMatch = await checkPassword(signInDto.userPassword, user.userPassword);
 
       if (!isMatch) {
         return customResponse(res, 400, 'Contraseña incorrecta', null);

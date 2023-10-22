@@ -2,33 +2,71 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty } from 'class-validator';
 import { DataTypes } from "@sequelize/core";
 export class CreateUserDto {
-
-  @ApiProperty()
+  @ApiProperty({
+    type: 'string',
+    description: 'User name',
+    example: 'John Doe',
+  })
+  @IsNotEmpty({
+    message: 'El nombre es obligatorio',
+  })
   userName: string;
 
-  @ApiProperty()
-  firstName: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  lastName: string;
-
-  @ApiProperty()
+  @ApiProperty({
+    type: 'string',
+    description: 'User email',
+    example: 'john@gmail.com',
+  })
+  @IsNotEmpty({
+    message: 'El email es obligatorio',
+  })
   @IsEmail()
-  email:string;
+  userEmail: string;
 
   @ApiProperty()
-  password: string;
+  @IsNotEmpty({
+    message: 'La contraseña es obligatoria',
+  })
+  userPassword: string;
 
-  @ApiProperty(
-      {
-        type: 'string',
-        description: 'List of user roles',
-        example: ['admin', 'user'],
-      }
-  )
-  userRoles: string;
+  @ApiProperty({
+    type: 'string',
+    description: 'User cedula',
+    example: '123456789',
+  })
+  @IsNotEmpty({
+    message: 'La cédula es obligatoria',
+  })
+  userCedula: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    type: 'string',
+    description: 'User phone',
+    example: '123456789',
+  })
+  @IsNotEmpty({
+    message: 'El teléfono es obligatorio',
+  })
+  userPhone: string;
+
+  @ApiProperty({ 
+    type: 'string',
+    description: 'User image',
+    example: 'https://www.google.com',
+  })
+  userImage: string;
+
+  @ApiProperty({
+    type: 'string',
+    description: 'User role',
+    example: 'admin'
+  })
+  userRol: string;
+
+  @ApiProperty({
+    type: 'boolean',
+    description: 'User status',
+    example: true
+  })
   isActive: boolean;
 }

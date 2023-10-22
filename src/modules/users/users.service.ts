@@ -6,6 +6,7 @@ import { User } from "./entities/user.entity";
 import { hashPassword} from 'src/helpers/password';
 import { customResponse } from 'src/helpers/customResponse';
 import { Response } from 'express';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class UsersService {
@@ -22,14 +23,21 @@ export class UsersService {
   async create(createUserDto: CreateUserDto, res: Response) {
     
     //Verify if user exist
-    const existUser = await this.userModel.findOne({ where: { userName: createUserDto.userName } });
+    const existUser = await this.userModel.findOne({ 
+      where:{
+        [Op.or]: [ 
+          {userEmail: createUserDto.userEmail}, 
+          {userCedula: createUserDto.userCedula}
+        ]
+      }
+      });
     if (existUser) {
       return customResponse(res,400,'Usuario ya existe',null);
     }
 
     // If not exist, we create the user
-    const password = await hashPassword(createUserDto.password);
-    createUserDto = {...createUserDto, userRoles: createUserDto.userRoles.toString(), password: password}
+    const password = await hashPassword(createUserDto.userPassword);
+    createUserDto = {...createUserDto, userRol: createUserDto.userRol, userPassword: password}
     const newUser = await this.userModel.create(createUserDto);
     return customResponse(res,201,'Usuario creado',newUser);
   }
@@ -73,12 +81,17 @@ export class UsersService {
     return user ? user : null;
   }
 
-  async findOneByEmail(email: string) {
-    const user = await this.userModel.findOne({ where: { email } });
+  /**
+   * Method to find one user by userEmail, used in auth
+   * @param userEmail 
+   * @returns 
+   */
+  async findByEmail(userEmail: string) {
+    const user = await this.userModel.findOne({ where: { userEmail } });
     if(user) {
       return user;
     }
-    return `Usuario no existe`;
+    return null
   }
   
   async update(id: number, updateUserDto: UpdateUserDto) {
