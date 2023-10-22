@@ -40,9 +40,9 @@ export class UsersService {
    */
   async findAll(res: Response) {
     const allUsers = await this.userModel.findAll();
-    console.log('allUsers', allUsers.length);
+    
     if (allUsers.length > 0) {
-      return allUsers;
+      return customResponse(res,200,'Usuarios encontrados',allUsers);
     }
     return customResponse(res,404,'No hay usuarios registrados',null);
     
