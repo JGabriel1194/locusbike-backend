@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable,UnauthorizedException } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { JwtService } from "@nestjs/jwt";
-import { Request, json } from "express";
+import { Request } from "express";
 import { IS_PUBLIC_KEY } from "./auth.decorator";
 
 @Injectable()
@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
         const request = context.switchToHttp().getRequest();
         const token = this.extractTokenFromHeader(request);
         console.log(token);
-        if(!token) throw new UnauthorizedException('No estas autorizado')        
+        if(!token) throw new UnauthorizedException(['No estas autorizado'])        
         
         try {
             const payload = this.jwtService.verifyAsync(

@@ -13,18 +13,11 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiBody, ApiTags, ApiHeader, ApiResponse, ApiBasicAuth, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { Response } from "express";
 
 @ApiTags('users')
-@ApiBasicAuth()
 @ApiBearerAuth()
-@ApiHeader({
-  name: 'Authorization',
-  description: 'Auth token',
-  required: true,
-})
-
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}

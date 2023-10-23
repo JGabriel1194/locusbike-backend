@@ -8,10 +8,21 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   //Configuración de swagger
+  const options = new DocumentBuilder().addBearerAuth();
+;
   const config = new DocumentBuilder()
     .setTitle('Locus Bike - API')
     .setDescription('The cats API description')
     .setVersion('1.0')
+    .addBearerAuth({
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT',
+      name: 'JWT',
+      description: 'Enter JWT token',
+      in: 'header',
+
+    })
     .addTag('users', 'Users API')
     .addTag('auth', 'Auth API')
     .build();
