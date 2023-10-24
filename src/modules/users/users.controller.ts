@@ -14,6 +14,7 @@ import { UsersService } from './users.service';
 import { UserDto } from './dto/user.dto';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { Response } from "express";
+import { PasswordDto } from './dto/password.dto';
 
 @ApiTags('users')
 @ApiBearerAuth()
@@ -46,4 +47,10 @@ export class UsersController {
   remove(@Res() res: Response, @Param('id') id: string) {
     return this.usersService.remove(res,+id);
   }
+
+  @Patch('updatePassword/:id')
+  updatePassword(@Res() res: Response, @Param('id') id: string, @Body() password: PasswordDto) {
+    return this.usersService.updatePassword(res, +id, password);
+  }
+  
 }

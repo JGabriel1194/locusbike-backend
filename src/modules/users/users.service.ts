@@ -6,6 +6,7 @@ import { hashPassword} from 'src/helpers/password';
 import { customResponse, badResponse } from 'src/helpers/customResponses';
 import { Response } from 'express';
 import { Op } from 'sequelize';
+import { PasswordDto } from './dto/password.dto';
 
 @Injectable()
 export class UsersService {
@@ -38,7 +39,6 @@ export class UsersService {
       const password = await hashPassword(createUserDto.userPassword);
       createUserDto = {
         ...createUserDto,
-        userAddres: createUserDto.userAddres,
         userPassword: password,
       };
       const newUser = await this.userModel.create(createUserDto);
@@ -121,12 +121,18 @@ export class UsersService {
     }
   }
 
+  /**
+   * Method to update a user
+   * @param id - user id
+   * @param updateUserDto - data to update
+   * @returns
+   */
   async update(res: Response, id: number, updateUserDto: UserDto) {
     try {
       const user = await this.userModel.findOne({ where: { id } });
       if (user) {
         await user.update(updateUserDto);
-        return customResponse(true,res, 200, 'Usuario actualizado', user);
+        return customResponse(true, res, 200, 'Usuario actualizado', user);
       }
       return customResponse(false,res, 404, 'Usuario no encontrado', null);
     } catch (error) {
@@ -135,12 +141,32 @@ export class UsersService {
     }
   }
 
+  /**
+   * Method to remove a user
+   * @param id - user id
+   * @returns
+   */
   async remove(res: Response, id: number) {
     try {
       const user = this.userModel.findOne({ where: { id } });
       if (user) {
         this.userModel.destroy({ where: { id } });
         return customResponse(true,res, 200, 'Usuario eliminado', null);
+      }
+      return customResponse(false,res, 404, 'Usuario no encontrado', null);
+    } catch (error) {
+      console.log('ERROR ----->', error);
+      return badResponse(res);
+    }
+  }
+
+  async updatePassword(res: Response, id: number, password: PasswordDto) {
+    try {
+      const user = await this.userModel.findOne({ where: { id } });
+      if (user) {
+        const newPassword = await hashPassword(password.password);
+        await user.update({ userPassword: newPassword });
+        return customResponse(true,res, 200, 'Contraseña actualizada', null);
       }
       return customResponse(false,res, 404, 'Usuario no encontrado', null);
     } catch (error) {
