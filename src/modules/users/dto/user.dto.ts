@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty } from 'class-validator';
 import { DataTypes } from "@sequelize/core";
-export class CreateUserDto {
+export class UserDto {
   @ApiProperty({
     type: 'string',
     description: 'User name',
@@ -23,7 +23,11 @@ export class CreateUserDto {
   @IsEmail()
   userEmail: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    type: 'string',
+    description: 'User password',
+    example: '123456789',
+  })
   @IsNotEmpty({
     message: 'La contraseña es obligatoria',
   })
@@ -32,7 +36,7 @@ export class CreateUserDto {
   @ApiProperty({
     type: 'string',
     description: 'User cedula',
-    example: '123456789',
+    example: '0123456789',
   })
   @IsNotEmpty({
     message: 'La cédula es obligatoria',
@@ -42,7 +46,7 @@ export class CreateUserDto {
   @ApiProperty({
     type: 'string',
     description: 'User phone',
-    example: '123456789',
+    example: '0123456789',
   })
   @IsNotEmpty({
     message: 'El teléfono es obligatorio',

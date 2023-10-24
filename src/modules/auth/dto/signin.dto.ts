@@ -10,7 +10,12 @@ export class SignInDto {
   @IsNotEmpty({
     message: 'El email es obligatorio',
   })
-  @IsEmail()
+  @IsEmail({
+    allow_display_name: true,
+    allow_utf8_local_part: false,
+    require_tld: true,
+    ignore_max_length: false,
+  })
   userEmail: string;
 
   @ApiProperty({

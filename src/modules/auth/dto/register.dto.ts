@@ -23,7 +23,11 @@ export class RegisterDto {
   @IsEmail()
   userEmail: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    type: 'string',
+    description: 'User password',
+    example: '123456789',
+  })
   @IsNotEmpty({
     message: 'La contraseña es obligatoria',
   })
@@ -32,7 +36,7 @@ export class RegisterDto {
   @ApiProperty({
     type: 'string',
     description: 'User cedula',
-    example: '123456789',
+    example: '0123456789',
   })
   @IsNotEmpty({
     message: 'La cédula es obligatoria',
@@ -45,7 +49,7 @@ export class RegisterDto {
   @ApiProperty({
     type: 'string',
     description: 'User phone',
-    example: '123456789',
+    example: '0123456789',
   })
   @IsNotEmpty({
     message: 'El teléfono es obligatorio',

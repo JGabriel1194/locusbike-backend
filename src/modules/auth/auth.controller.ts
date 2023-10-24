@@ -14,12 +14,12 @@ export class AuthController {
   @Public()
   @Post('login')
   signIn(@Body() signInDto: SignInDto, @Res() res: Response) {
-    return this.authService.signIn(signInDto, res);
+    return this.authService.signIn(res, signInDto);
   }
 
   @Public()
   @Post('register')
   register(@Body() registerDto: RegisterDto, @Res() res: Response) {
-    return this.authService.register(registerDto, res);
+    return this.authService.register(res, registerDto);
   }
 }

@@ -3,6 +3,7 @@ import { Reflector } from "@nestjs/core";
 import { JwtService } from "@nestjs/jwt";
 import { Request } from "express";
 import { IS_PUBLIC_KEY } from "./auth.decorator";
+import { customResponse } from "src/helpers/customResponses";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -22,8 +23,11 @@ export class AuthGuard implements CanActivate {
         // If is not public, we will check if there is a token in the request
         const request = context.switchToHttp().getRequest();
         const token = this.extractTokenFromHeader(request);
-        console.log(token);
-        if(!token) throw new UnauthorizedException(['No estas autorizado'])        
+        console.log('Print ---',token);
+        
+        if(!token){
+            customResponse(false,request.res,401,'No estas autorizado',null);
+        }        
         
         try {
             const payload = this.jwtService.verifyAsync(
@@ -33,7 +37,7 @@ export class AuthGuard implements CanActivate {
             request.user = payload;
             return true;
         } catch (error) {
-            throw new UnauthorizedException('No estas autorizado');
+            customResponse(false,request.res,401,'No estas autorizado',null);
         }
     }
 

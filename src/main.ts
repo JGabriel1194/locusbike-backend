@@ -21,7 +21,6 @@ async function bootstrap() {
       name: 'JWT',
       description: 'Enter JWT token',
       in: 'header',
-
     })
     .addTag('users', 'Users API')
     .addTag('auth', 'Auth API')

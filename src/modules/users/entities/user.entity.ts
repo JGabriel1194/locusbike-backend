@@ -1,5 +1,5 @@
-import { Column, Model, Table } from 'sequelize-typescript';
-import { DataTypes } from '@sequelize/core';
+import { col } from 'sequelize';
+import { BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 
 @Table
 export class User extends Model<User> {
@@ -27,4 +27,13 @@ export class User extends Model<User> {
 
   @Column({ defaultValue: true })
   isActive: boolean;
+
+  // @ForeignKey(() => Role)
+  // @Column
+  // roleId: number;
+
+  // @BelongsTo(() => Role)
+  // @Column
+  // role: Role;
+
 }

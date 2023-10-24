@@ -1,58 +1,64 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { SignInDto } from './dto/signin.dto';
-import { RegisterDto } from './dto/register.dto';
-import { UsersService } from 'src/modules/users/users.service';
+import { User } from '../users/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
-import { customResponse } from 'src/helpers/customResponses';
+import { badResponse, customResponse } from 'src/helpers/customResponses';
 import { Response } from 'express';
-import { checkPassword } from '../../helpers/password';
-import { json } from 'sequelize';
+import { checkPassword} from '../../helpers/password';
+import { InjectModel } from '@nestjs/sequelize';
+import { UsersService } from 'src/modules/users/users.service';
+
 @Injectable()
 export class AuthService {
   constructor(
-    private usersService: UsersService,
     private jwtService: JwtService,
+    private usersService: UsersService,
+    @InjectModel(User)
+    private userModel: typeof User,
   ) {}
 
-  async signIn(signInDto: SignInDto, res: Response) {
+  async signIn(res: Response, signInDto: SignInDto) {
     try {
       //Verify if user exist
-      const user = await this.usersService.findByEmail(signInDto.userEmail);
+      const user = await this.userModel.findOne({ where: {userEmail:signInDto.userEmail}});
 
       if (!user) {
-        return customResponse(res, 404, ['Usuario no encontrado'], null);
+        return customResponse(false,res, 404, 'Usuario no encontrado', null);
       }
 
       //Verify if password is correct
       const isMatch = await checkPassword(signInDto.userPassword, user.userPassword);
 
       if (!isMatch) {
-        return customResponse(res, 400, ['Contraseña incorrecta'], null);
+        return customResponse(false,res, 400, 'Contraseña incorrecta', null);
       }
 
       //Generate token
       const payload = { username: user.userName, sub: user.id };
       const token = this.jwtService.sign(payload);
-      return customResponse(res, 200, ['Login correcto'], { token });
+      return customResponse(true,res, 200, 'Login correcto', { token });
     } catch (error) {
-      return customResponse(res, 500, ['Error interno'], error);
+      return badResponse(res);
     }
   }
 
-  async register(registerDto: any, res: Response) { 
+  async register(res: Response,registerDto: any) { 
     try {
       //Verify if user exist
-      const existUser = await this.usersService.findByEmail(registerDto.userEmail);
+      const existUser = await this.userModel.findOne({
+        where: { userEmail: registerDto.userEmail },
+      });
 
       if (existUser) {
-        return customResponse(res, 400, ['Usuario ya existe'], null);
+        return customResponse(false,res,400, 'Usuario ya existe', null);
       }
 
       // If not exist, we create the user
-      await this.usersService.create(registerDto, res);
+      // If not exist, we create the user
+      await this.usersService.create(res, registerDto);
 
     } catch (error) {
-      return customResponse(res, 500, ['Error interno'], error);
+      return badResponse(res);
     }
   } 
 }
