@@ -18,7 +18,7 @@ import { PasswordDto } from './dto/password.dto';
 
 @ApiTags('users')
 @ApiBearerAuth()
-@Controller('users')
+@Controller('api/users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 

@@ -7,6 +7,7 @@ import { Response } from 'express';
 import { checkPassword} from '../../helpers/password';
 import { InjectModel } from '@nestjs/sequelize';
 import { UsersService } from 'src/modules/users/users.service';
+import { RegisterDto } from './dto/register.dto';
 
 @Injectable()
 export class AuthService {
@@ -42,8 +43,9 @@ export class AuthService {
     }
   }
 
-  async register(res: Response,registerDto: any) { 
+  async register(res: Response,registerDto: RegisterDto) { 
     try {
+      console.log('registerDto',registerDto)
       //Verify if user exist
       const existUser = await this.userModel.findOne({
         where: { userEmail: registerDto.userEmail },
