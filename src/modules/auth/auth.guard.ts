@@ -3,7 +3,7 @@ import { Reflector } from "@nestjs/core";
 import { JwtService } from "@nestjs/jwt";
 import { Request } from "express";
 import { IS_PUBLIC_KEY } from "./auth.decorator";
-import { customResponse } from "src/helpers/customResponses";
+import { badResponse, customResponse } from "src/helpers/customResponses";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -23,10 +23,11 @@ export class AuthGuard implements CanActivate {
         // If is not public, we will check if there is a token in the request
         const request = context.switchToHttp().getRequest();
         const token = this.extractTokenFromHeader(request);
-        console.log('Print ---',token);
+        console.log('Token---',token);
         
         if(!token){
             customResponse(false,request.res,401,'No estas autorizado',null);
+            return false;
         }        
         
         try {
@@ -35,10 +36,10 @@ export class AuthGuard implements CanActivate {
                     secret: process.env.JWT_SECRET,
                 });
             request.user = payload;
-            return true;
         } catch (error) {
-            customResponse(false,request.res,401,'No estas autorizado',null);
+           badResponse(error);
         }
+        return true;
     }
 
     private extractTokenFromHeader(request: Request): string | undefined {

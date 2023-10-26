@@ -2,9 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path';
+import hbs = require('hbs');
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.useGlobalPipes(new ValidationPipe());
 
   //Configuración de swagger
@@ -27,7 +30,12 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('documentation', app, document);
+  
+  app.useStaticAssets(join(__dirname, '..', 'public'));
+  app.setBaseViewsDir(join(__dirname,'..','views'));
+  app.setViewEngine('hbs');
 
+  hbs.registerPartials(join(__dirname, '..', 'views', 'partials'));
   //Arrancar el servidor en el puerto que nos indique el sistema operativo
   await app.listen(AppModule.port);
 }

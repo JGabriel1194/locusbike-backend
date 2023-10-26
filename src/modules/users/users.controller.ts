@@ -18,10 +18,18 @@ import { PasswordDto } from './dto/password.dto';
 
 @ApiTags('users')
 @ApiBearerAuth()
-@Controller('api/users')
+@Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService
+  ) {}
 
+  /**
+   * 
+   * @param createUserDto - Data to create a new user
+   * @param res - Response
+   * @returns 
+   */
   //@ApiBody({ type: [CreateUserDto] })
   @Post()
   create(@Body() createUserDto: UserDto, @Res() res: Response) {

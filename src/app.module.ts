@@ -7,6 +7,10 @@ import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { JwtModule } from '@nestjs/jwt';
+import { UploadsModule } from './modules/uploads/uploads.module';
+import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
+
 
 @Module({
   imports: [
@@ -36,8 +40,12 @@ import { JwtModule } from '@nestjs/jwt';
       }),
       inject: [ConfigService],
     }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname,'../','public')
+    // }),
     UsersModule,
     AuthModule,
+    UploadsModule,
   ],
   controllers: [AppController],
   providers: [
