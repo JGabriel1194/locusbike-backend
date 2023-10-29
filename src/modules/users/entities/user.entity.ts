@@ -1,4 +1,3 @@
-import { col } from 'sequelize';
 import { BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 
 @Table

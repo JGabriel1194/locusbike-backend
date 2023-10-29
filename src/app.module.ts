@@ -10,6 +10,18 @@ import { JwtModule } from '@nestjs/jwt';
 import { UploadsModule } from './modules/uploads/uploads.module';
 import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { BrandsModule } from './modules/brands/brands.module';
+import { ModelsModule } from './modules/models/models.module';
+import { BrakesModule } from './modules/brakes/brakes.module';
+import { HandlebarsModule } from './modules/handlebars/handlebars.module';
+import { PotenciesModule } from './modules/potencies/potencies.module';
+import { TransmisionsModule } from './modules/transmisions/transmisions.module';
+import { PedalsModule } from './modules/pedals/pedals.module';
+import { SeatsModule } from './modules/seats/seats.module';
+import { RingsModule } from './modules/rings/rings.module';
+import { TiresModule } from './modules/tires/tires.module';
+import { StatesModule } from './modules/states/states.module';
+import { BikesModule } from './modules/bikes/bikes.module';
 
 
 @Module({
@@ -46,6 +58,18 @@ import { ServeStaticModule } from '@nestjs/serve-static';
     UsersModule,
     AuthModule,
     UploadsModule,
+    BrandsModule,
+    ModelsModule,
+    BrakesModule,
+    HandlebarsModule,
+    PotenciesModule,
+    TransmisionsModule,
+    PedalsModule,
+    SeatsModule,
+    RingsModule,
+    TiresModule,
+    StatesModule,
+    BikesModule,
   ],
   controllers: [AppController],
   providers: [

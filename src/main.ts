@@ -28,6 +28,18 @@ async function bootstrap() {
     .addTag('users', 'Users API')
     .addTag('auth', 'Auth API')
     .addTag('uploads', 'Uploads API')
+    .addTag('brands', 'Marcas API')
+    .addTag('bikes', 'Bicicletas API')
+    .addTag('models', 'Modelos API')
+    .addTag('brakes', 'Frenos API')
+    .addTag('handlebars', 'Manubrios API')
+    .addTag('potencies', 'Potencias API')
+    .addTag('seats', 'Asientos API')
+    .addTag('transmissions', 'Transmisiones API')
+    .addTag('seats', 'Asientos API')
+    .addTag('rings','Aros API')
+    .addTag('tires','Llantas API')
+    .addTag('states','Estados API')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('documentation', app, document);
