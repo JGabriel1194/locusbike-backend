@@ -8,6 +8,8 @@ import { checkPassword} from '../../helpers/password';
 import { InjectModel } from '@nestjs/sequelize';
 import { UsersService } from 'src/modules/users/users.service';
 import { RegisterDto } from './dto/register.dto';
+import { googleVerify } from 'src/helpers/google-verify';
+import { GoogleDto } from './dto/google.dto';
 
 @Injectable()
 export class AuthService {
@@ -63,4 +65,39 @@ export class AuthService {
       return badResponse(res);
     }
   } 
+
+  async loginGoogle(res: Response,googleDto: GoogleDto) {
+    try {
+      const googleUser = await googleVerify(googleDto.googleToken);
+      if (!googleUser) {
+        return customResponse(false,res, 400, 'Token de google no es válido', null);
+      }
+      const user = await this.userModel.findOne({ where: { userEmail: googleUser.email } });
+
+      let newUser;
+      if(!user){
+        newUser = await this.usersService.create(res, {
+          userName: googleUser.name,
+          userEmail: googleUser.email,
+          userPassword: '123456',
+          userCedula: '123456789',
+          userPhone: '123456789',
+          userImage: googleUser.picture,
+          userAddres: 'Calle 123',
+          isActive: true,
+        });
+        const payload = { username: newUser.userName, sub: newUser.id };
+        const token = this.jwtService.sign(payload);
+        return customResponse(true,res, 200, 'Login correcto', { token });
+      }
+
+      //Generate token
+      const payload = { username: user.userName, sub: user.id };
+      const token = this.jwtService.sign(payload);
+      return customResponse(true,res, 200, 'Login correcto', { token });
+      
+    } catch (error) {
+      
+    }
+  }
 }

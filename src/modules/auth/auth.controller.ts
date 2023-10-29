@@ -5,6 +5,7 @@ import { RegisterDto } from './dto/register.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { Public } from './auth.decorator';
+import { GoogleDto } from './dto/google.dto';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -21,5 +22,11 @@ export class AuthController {
   @Post('register')
   register(@Body() registerDto: RegisterDto, @Res() res: Response) {
     return this.authService.register(res, registerDto);
+  }
+
+  @Public()
+  @Post('google')
+  googleSignIn(@Body() googleDto: GoogleDto, @Res() res: Response) {
+    return this.authService.loginGoogle(res, googleDto);
   }
 }
