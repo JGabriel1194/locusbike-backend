@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Brakes.init({
-    brakeName: DataTypes.STRING,
+    brakeTipe: DataTypes.STRING,
+    brakeBrand: DataTypes.STRING,
     brakeDetail: DataTypes.STRING,
     brakeImage: DataTypes.STRING
   }, {

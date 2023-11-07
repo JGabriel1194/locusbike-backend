@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res } from '@nestjs/common';
 import { BrakesService } from './brakes.service';
 import { CreateBrakeDto } from './dto/create-brake.dto';
 import { UpdateBrakeDto } from './dto/update-brake.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Response } from 'express';
 
 @ApiTags('brakes')
 @ApiBearerAuth()
@@ -11,27 +12,27 @@ export class BrakesController {
   constructor(private readonly brakesService: BrakesService) {}
 
   @Post()
-  create(@Body() createBrakeDto: CreateBrakeDto) {
-    return this.brakesService.create(createBrakeDto);
+  create(@Res() res: Response, @Body() createBrakeDto: CreateBrakeDto) {
+    return this.brakesService.create(res,createBrakeDto);
   }
 
   @Get()
-  findAll() {
-    return this.brakesService.findAll();
+  findAll(@Res() res: Response) {
+    return this.brakesService.findAll(res);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.brakesService.findOne(+id);
+  findOne(@Res() res: Response, @Param('id') id: string) {
+    return this.brakesService.findOne(res,+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBrakeDto: UpdateBrakeDto) {
-    return this.brakesService.update(+id, updateBrakeDto);
+  update(@Res() res: Response, @Param('id') id: string, @Body() updateBrakeDto: UpdateBrakeDto) {
+    return this.brakesService.update(res,+id, updateBrakeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.brakesService.remove(+id);
+  remove(@Res() res: Response, @Param('id') id: string) {
+    return this.brakesService.remove(res,+id);
   }
 }

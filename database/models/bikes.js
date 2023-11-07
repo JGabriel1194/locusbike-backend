@@ -13,28 +13,30 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Bikes.init({
-    bikeSerie: DataTypes.STRING,
-    bikeSize: DataTypes.STRING,
-    bileColor: DataTypes.STRING,
-    bikeYear: DataTypes.DATE,
-    bikeMaterial: DataTypes.STRING,
-    brandId: DataTypes.INTEGER,
-    modelId: DataTypes.INTEGER,
-    brakeId: DataTypes.INTEGER,
-    brakebrandId: DataTypes.INTEGER,
-    handlebarId: DataTypes.INTEGER,
-    potencyId: DataTypes.INTEGER,
-    transmisionId: DataTypes.INTEGER,
-    pedalId: DataTypes.INTEGER,
-    seatId: DataTypes.INTEGER,
-    ringId: DataTypes.INTEGER,
-    tireId: DataTypes.INTEGER,
-    stateId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Bikes',
-  });
+  Bikes.init(
+    {
+      bikeSerie: DataTypes.STRING,
+      bikeBrand: DataTypes.STRING,
+      bikeModel: DataTypes.STRING,
+      bikeSize: DataTypes.STRING,
+      bileColor: DataTypes.STRING,
+      bikeYear: DataTypes.DATE,
+      bikeMaterial: DataTypes.STRING,
+      bikeBrake: DataTypes.STRING,
+      bikeBrakeBrand: DataTypes.STRING,
+      bikeHandlebar: DataTypes.STRING,
+      bikePotency: DataTypes.STRING,
+      bikeTransmission: DataTypes.STRING,
+      bikePedal: DataTypes.STRING,
+      bikeSeat: DataTypes.STRING,
+      bikeRing: DataTypes.STRING,
+      bikeTire: DataTypes.STRING,
+      bikeState: DataTypes.STRING
+    },
+    {
+      sequelize,
+      modelName: 'Bikes',
+    },
+  );
   return Bikes;
 };

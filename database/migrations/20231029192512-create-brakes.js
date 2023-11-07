@@ -9,7 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      brakeName: {
+      brakeTipe: {
+        type: Sequelize.STRING
+      },
+      brakeBrand: {
         type: Sequelize.STRING
       },
       brakeDetail: {

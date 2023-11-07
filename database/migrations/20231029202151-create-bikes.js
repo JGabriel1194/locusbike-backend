@@ -12,6 +12,12 @@ module.exports = {
       bikeSerie: {
         type: Sequelize.STRING
       },
+      bikeBrand: {
+        type: Sequelize.STRING
+      },
+      bikeModel: {
+        type: Sequelize.STRING
+      },
       bikeSize: {
         type: Sequelize.STRING
       },
@@ -24,44 +30,35 @@ module.exports = {
       bikeMaterial: {
         type: Sequelize.STRING
       },
-      brandId: {
-        type: Sequelize.INTEGER
+      bikeBrake: {
+        type: Sequelize.STRING
       },
-      modelId: {
-        type: Sequelize.INTEGER
+      bikeBrakeBrand: {
+        type: Sequelize.STRING
       },
-      brakeId: {
-        type: Sequelize.INTEGER
+      bikeHandlebar: {
+        type: Sequelize.STRING
       },
-      brakebrandId: {
-        type: Sequelize.INTEGER
+      bikePotency: {
+        type: Sequelize.STRING
       },
-      handlebarId: {
-        type: Sequelize.INTEGER
+      bikeTransmission: {
+        type: Sequelize.STRING
       },
-      potencyId: {
-        type: Sequelize.INTEGER
+      bikePedal: {
+        type: Sequelize.STRING
       },
-      transmisionId: {
-        type: Sequelize.INTEGER
+      bikeSeat: {
+        type: Sequelize.STRING
       },
-      pedalId: {
-        type: Sequelize.INTEGER
+      bikeRing: {
+        type: Sequelize.STRING
       },
-      seatId: {
-        type: Sequelize.INTEGER
+      bikeTire: {
+        type: Sequelize.STRING
       },
-      ringId: {
-        type: Sequelize.INTEGER
-      },
-      tireId: {
-        type: Sequelize.INTEGER
-      },
-      stateId: {
-        type: Sequelize.INTEGER
-      },
-      userId: {
-        type: Sequelize.INTEGER
+      bikeState: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

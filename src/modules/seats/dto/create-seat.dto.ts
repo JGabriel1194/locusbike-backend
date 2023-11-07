@@ -1,1 +1,5 @@
-export class CreateSeatDto {}
+export class CreateSeatDto {
+    seatName: string;
+    seatImage: string;
+    seatDetail: string;
+}
