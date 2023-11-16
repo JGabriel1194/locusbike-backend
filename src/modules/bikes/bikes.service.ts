@@ -64,7 +64,6 @@ export class BikesService {
     try {
       //find bike
       const bike = await this.bikeModel.findOne({ where: { id: id } });
-      console.log('BIKE ----->', bike);
       if (bike) {
         //update bike
         const updateBike = await bike.update(updateBikeDto);

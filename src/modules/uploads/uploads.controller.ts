@@ -5,6 +5,7 @@ import { UploadsService } from './uploads.service';
 import { Response } from 'express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { Public } from '../auth/auth.decorator';
 
 @ApiTags('uploads')
 @ApiBearerAuth()
@@ -19,6 +20,7 @@ export class UploadsController {
    * @param file - File to upload
    * @returns 
    */
+  @Public()
   @Post('image')
   @ApiConsumes('multipart/form-data')
   @ApiBody({
