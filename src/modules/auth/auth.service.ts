@@ -120,6 +120,23 @@ export class AuthService {
     }
   }
 
+  async verify(token: string) {
+    try {
+      const data = await this.decodeJWT(token);
+      console.log('data',data)
+      const user = await this.userModel.findOne({ where: { id: data['object'].id } });
+      if(!user){
+        return false;
+      }
+      user.isActive = true;
+      await user.save();
+      return true
+    } catch (error) {
+      console.log('ERROR ----->', error);
+      badResponse(error);
+    }
+  }
+
   /**
    * generate a jwt
    * 
@@ -150,23 +167,23 @@ export class AuthService {
     }
   }
 
-  async decodeJWT(res: Response,payload: string) {
+  async decodeJWT(payload: string) {
     try {
       const data = this.jwtService.decode(payload);
       return data;
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(res);
+      return badResponse(error);
     }
   }
 
-  async verifyJWT(res: Response,token: string) {
+  async verifyJWT(token: string) {
     try {
       const data = this.jwtService.verify(token);
       return data;
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(res);
+      return badResponse(error);
     }
   }
 }

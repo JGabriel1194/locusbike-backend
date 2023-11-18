@@ -11,7 +11,7 @@ export class MailService {
 
   async sendUserConfirmationEmail(res: Response, createMailDto: CreateMailDto, token: string) {
     try {
-      const url = `${process.env.HOST_NAME}/confirm/${token}`;
+      const url = `${process.env.HOSTNAME}/auth/verify/${token}`;
 
       const sendMail = await this.mailerService.sendMail({
         to: createMailDto.userEmail,

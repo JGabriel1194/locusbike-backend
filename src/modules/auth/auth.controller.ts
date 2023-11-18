@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, UseInterceptors, UploadedFile, Render } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/signin.dto';
 import { RegisterDto } from './dto/register.dto';
@@ -48,5 +48,16 @@ export class AuthController {
   @Post('google')
   googleSignIn(@Body() googleDto: GoogleDto, @Res() res: Response) {
     return this.authService.loginGoogle(res, googleDto);
+  }
+  @Public()
+  @Get('verify/:token')
+  
+  async verify(@Param('token') token: string, @Res() res: Response) {
+    const verify = await this.authService.verify(token);
+    if (verify) {
+      return res.render('verify', { msg: 'Usuario verificado' });
+    }else{
+      return res.render('verify', { msg: 'No se a podido verificar su usuario' });
+    }
   }
 }
