@@ -77,7 +77,7 @@ export class RegisterDto {
   @ApiProperty({
     type: 'boolean',
     description: 'User status',
-    example: true,
+    example: false,
   })
   isActive: boolean;
 }
