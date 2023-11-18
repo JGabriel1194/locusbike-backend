@@ -23,6 +23,7 @@ export class UploadsService {
         }
         return customResponse(true,res, 201, 'Archivo subido', uploadFile);
     } catch (error) {
+      console.log('Error --->',error);
         badResponse(error);
     }
   }

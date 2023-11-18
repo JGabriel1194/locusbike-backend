@@ -9,7 +9,7 @@ export class FileDto {
     fileName: string;
 
     @ApiProperty({
-        type: 'string',
+        type: 'file',
         description: 'File type',
         example: 'image/png',
     })

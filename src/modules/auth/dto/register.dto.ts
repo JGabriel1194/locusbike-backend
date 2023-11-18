@@ -60,7 +60,8 @@ export class RegisterDto {
   userPhone: string;
 
   @ApiProperty({
-    type: 'string',
+    type: 'file',
+    format: 'binary',
     description: 'User image',
     example: 'https://www.google.com',
   })

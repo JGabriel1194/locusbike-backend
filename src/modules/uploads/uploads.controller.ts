@@ -1,4 +1,4 @@
-import { Controller, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { UploadsService } from './uploads.service';
@@ -6,6 +6,7 @@ import { Response } from 'express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { Public } from '../auth/auth.decorator';
+import { FileDto } from './dto/file.dto';
 
 @ApiTags('uploads')
 @ApiBearerAuth()
@@ -15,10 +16,10 @@ export class UploadsController {
 
   //Method to upload a image
   /**
-   * 
+   *
    * @param res - Response
    * @param file - File to upload
-   * @returns 
+   * @returns
    */
   @Public()
   @Post('image')
@@ -30,7 +31,7 @@ export class UploadsController {
         file: {
           type: 'string',
           format: 'binary',
-        },
+        }
       },
     },
   })
@@ -48,17 +49,18 @@ export class UploadsController {
       }),
     }),
   )
-  uploadImage(@Res() res: Response, @UploadedFile() file: Express.Multer.File) {
-    const folder = 'images';
-    return this.uploadsService.UploadFile(res, folder, file);
+  uploadImage(@Res() res: Response, @UploadedFile() file: Express.Multer.File, @Body() body: FileDto) {
+    // const folder = 'images';
+    // return this.uploadsService.UploadFile(res, folder, file);
+    console.log(body);
   }
 
   //Method to upload a document
   /**
-   * 
+   *
    * @param res - Response
    * @param file - File to upload
-   * @returns 
+   * @returns
    */
   @Post('document')
   @ApiConsumes('multipart/form-data')

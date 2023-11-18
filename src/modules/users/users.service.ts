@@ -25,14 +25,11 @@ export class UsersService {
       //Verify if user exist
       const existUser = await this.userModel.findOne({
         where: {
-          [Op.or]: [
-            { userEmail: createUserDto.userEmail },
-            { userCedula: createUserDto.userCedula },
-          ],
+          userCedula: createUserDto.userCedula,
         },
       });
       if (existUser) {
-        return customResponse(false,res, 400, 'Usuario ya registrado', null);
+        return customResponse(false,res, 400, `El usuario con esta cédula ${existUser.userCedula} ya esta registrado`, null);
       }
 
       // If not exist, we create the user
@@ -42,7 +39,7 @@ export class UsersService {
         userPassword: password,
       };
       const newUser = await this.userModel.create(createUserDto);
-      return customResponse(true,res, 201, 'Usuario creado', newUser);
+      return newUser
     } catch (error) {
       console.log('ERROR ----->', error);
       return badResponse(res);

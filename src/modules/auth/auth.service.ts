@@ -10,12 +10,14 @@ import { UsersService } from 'src/modules/users/users.service';
 import { RegisterDto } from './dto/register.dto';
 import { googleVerify } from 'src/helpers/google-verify';
 import { GoogleDto } from './dto/google.dto';
+import { MailService } from '../mail/mail.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private jwtService: JwtService,
     private usersService: UsersService,
+    private mailService: MailService,
     @InjectModel(User)
     private userModel: typeof User,
   ) {}
@@ -37,29 +39,46 @@ export class AuthService {
       }
 
       //Generate token
-      const payload = { username: user.userName, sub: user.id };
-      const token = this.jwtService.sign(payload);
+      const token = await this.generateJwt(res, user.id, user.userName);
       return customResponse(true,res, 200, 'Login correcto', { token });
     } catch (error) {
       return badResponse(res);
     }
   }
 
-  async register(res: Response,registerDto: RegisterDto) { 
+  async register(res: Response,registerDto: RegisterDto, userImage: Express.Multer.File) { 
     try {
       console.log('registerDto',registerDto)
+
       //Verify if user exist
       const existUser = await this.userModel.findOne({
         where: { userEmail: registerDto.userEmail },
       });
 
       if (existUser) {
-        return customResponse(false,res,400, 'Usuario ya existe', null);
+        return customResponse(false,res,400, `El usuario con este correo ${existUser.userEmail} ya esta registrado`, null);
       }
 
       // If not exist, we create the user
-      // If not exist, we create the user
-      await this.usersService.create(res, registerDto);
+      registerDto.userImage = `${process.env.HOSTNAME}/uploads/images/${userImage.filename}`;
+      const newUser = await this.usersService.create(res, registerDto);
+
+      //Generate token
+      if(newUser){
+        const token = await this.generateJWTWhiteTime(res, {id:newUser.id, userName:newUser.userName},'7d');
+        if(token){
+          console.log('token',token)
+          const sendEmail = {
+            userName: newUser.userName,
+            userEmail: newUser.userEmail,
+          }
+          await this.mailService.sendUserConfirmationEmail(res,sendEmail,token);
+        }
+      }else{
+        return customResponse(false,res, 400, 'No se pudo crear el usuario', null);
+      }
+
+      
 
     } catch (error) {
       return badResponse(res);
@@ -98,6 +117,56 @@ export class AuthService {
       
     } catch (error) {
       
+    }
+  }
+
+  /**
+   * generate a jwt
+   * 
+   * @param res response
+   * @param id id of user
+   * @param userName user name
+   * @returns 
+   */
+  async generateJwt(res: Response, id: number, userName: string) {
+    try {
+      const payload = { id, userName };
+      const token = this.jwtService.sign(payload);
+      return token;
+    } catch (error) {
+      console.log('ERROR ----->', error);
+      return badResponse(res);
+    }
+  }
+
+  async generateJWTWhiteTime(res: Response,object:{},time:string | number | undefined) {
+    try {
+      const payload = {object};
+      const token = this.jwtService.sign(payload,{ expiresIn: time});
+      return token;
+    } catch (error) {
+      console.log('ERROR ----->', error);
+      return badResponse(res);
+    }
+  }
+
+  async decodeJWT(res: Response,payload: string) {
+    try {
+      const data = this.jwtService.decode(payload);
+      return data;
+    } catch (error) {
+      console.log('ERROR ----->', error);
+      return badResponse(res);
+    }
+  }
+
+  async verifyJWT(res: Response,token: string) {
+    try {
+      const data = this.jwtService.verify(token);
+      return data;
+    } catch (error) {
+      console.log('ERROR ----->', error);
+      return badResponse(res);
     }
   }
 }

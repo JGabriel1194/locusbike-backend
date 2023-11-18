@@ -22,6 +22,7 @@ import { RingsModule } from './modules/rings/rings.module';
 import { TiresModule } from './modules/tires/tires.module';
 import { StatesModule } from './modules/states/states.module';
 import { BikesModule } from './modules/bikes/bikes.module';
+import { MailModule } from './modules/mail/mail.module';
 
 
 @Module({
@@ -70,6 +71,7 @@ import { BikesModule } from './modules/bikes/bikes.module';
     TiresModule,
     StatesModule,
     BikesModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [
