@@ -77,10 +77,8 @@ export class AuthService {
       }else{
         customResponse(false,res, 400, 'No se pudo crear el usuario', null);
       }
-
-      
-
     } catch (error) {
+      console.log('ERROR ----->', error);
       badResponse(res);
     }
   } 
