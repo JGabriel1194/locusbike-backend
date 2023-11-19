@@ -21,7 +21,7 @@ export class UploadsService {
             fileType: file.mimetype,
             filePath: `${process.env.HOSTNAME}/uploads/${folder}/${file.filename}`,
         }
-        return customResponse(true,res, 201, 'Archivo subido', uploadFile);
+        customResponse(true,res, 201, 'Archivo subido', uploadFile);
     } catch (error) {
       console.log('Error --->',error);
         badResponse(error);

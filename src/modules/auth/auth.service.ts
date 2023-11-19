@@ -40,9 +40,9 @@ export class AuthService {
 
       //Generate token
       const token = await this.generateJwt(res, user.id, user.userName);
-      return customResponse(true,res, 200, 'Login correcto', { token });
+      customResponse(true,res, 200, 'Login correcto', { token });
     } catch (error) {
-      return badResponse(res);
+      badResponse(error);
     }
   }
 
@@ -56,7 +56,7 @@ export class AuthService {
       });
 
       if (existUser) {
-        return customResponse(false,res,400, `El usuario con este correo ${existUser.userEmail} ya esta registrado`, null);
+        customResponse(false,res,400, `El usuario con este correo ${existUser.userEmail} ya esta registrado`, null);
       }
 
       // If not exist, we create the user
@@ -75,13 +75,13 @@ export class AuthService {
           await this.mailService.sendUserConfirmationEmail(res,sendEmail,token,{ id: newUser.id });
         }
       }else{
-        return customResponse(false,res, 400, 'No se pudo crear el usuario', null);
+        customResponse(false,res, 400, 'No se pudo crear el usuario', null);
       }
 
       
 
     } catch (error) {
-      return badResponse(res);
+      badResponse(error);
     }
   } 
 
@@ -152,7 +152,7 @@ export class AuthService {
       return token;
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(res);
+      badResponse(error);
     }
   }
 
@@ -163,7 +163,7 @@ export class AuthService {
       return token;
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(res);
+      badResponse(error);
     }
   }
 
@@ -173,7 +173,7 @@ export class AuthService {
       return data;
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(error);
+      badResponse(error);
     }
   }
 
@@ -183,7 +183,7 @@ export class AuthService {
       return data;
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(error);
+      badResponse(error);
     }
   }
 }

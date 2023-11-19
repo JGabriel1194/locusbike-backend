@@ -26,10 +26,10 @@ export class BikesService {
       }
       // If not exist, we create the bike
       const newBike = await this.bikeModel.create(createBikeDto);
-      return customResponse(true,res, 201, 'Bicicleta creada', newBike);
+      customResponse(true,res, 201, 'Bicicleta creada', newBike);
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(error);
+      badResponse(error);
     }
   }
 
@@ -40,10 +40,10 @@ export class BikesService {
       if (allBikes.length > 0) {
         return customResponse(true, res, 200, 'Bicicletas encontradas', allBikes);
       }
-      return customResponse(false, res, 404, 'No se encontraron bicicletas', null);
+      customResponse(false, res, 404, 'No se encontraron bicicletas', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(error);
+      badResponse(error);
     }
   }
 
@@ -51,12 +51,12 @@ export class BikesService {
     try {
       const bike = await this.bikeModel.findOne({ where: { id: id } });
       if (bike) {
-        return customResponse(true, res, 200, 'Bicicleta encontrada', bike);
+        customResponse(true, res, 200, 'Bicicleta encontrada', bike);
       }
-      return customResponse(false, res, 404, 'Bicicleta no encontrada', null);
+      customResponse(false, res, 404, 'Bicicleta no encontrada', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(error);
+      badResponse(error);
     }
   }
 
@@ -67,12 +67,12 @@ export class BikesService {
       if (bike) {
         //update bike
         const updateBike = await bike.update(updateBikeDto);
-        return customResponse(true, res, 200, 'Bicicleta actualizada', updateBike);
+        customResponse(true, res, 200, 'Bicicleta actualizada', updateBike);
       }
-      return customResponse(false, res, 404, 'Bicicleta no encontrada', null);
+      customResponse(false, res, 404, 'Bicicleta no encontrada', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(error);
+      badResponse(error);
     }
   }
 
@@ -83,12 +83,12 @@ export class BikesService {
       if (bike) {
         //delete bike
         bike.destroy();
-        return customResponse(true, res, 200, 'Bicicleta eliminada', null);
+        customResponse(true, res, 200, 'Bicicleta eliminada', null);
       }
-      return customResponse(false, res, 404, 'Bicicleta no encontrada', null);
+      customResponse(false, res, 404, 'Bicicleta no encontrada', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(error);
+      badResponse(error);
     }
   }
 }

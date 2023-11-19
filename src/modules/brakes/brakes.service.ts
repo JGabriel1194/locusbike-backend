@@ -22,10 +22,10 @@ export class BrakesService {
   async create(res: Response, createBrakeDto: CreateBrakeDto) {
     try {
       const newBrake = await this.brakeModel.create(createBrakeDto);
-      return customResponse(true,res, 201, 'Frenos creados', newBrake);
+      customResponse(true,res, 201, 'Frenos creados', newBrake);
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(res);
+      badResponse(error);
     }  
   }
 
@@ -37,12 +37,12 @@ export class BrakesService {
     try {
       const allBrakes = await this.brakeModel.findAll();
       if (allBrakes.length > 0) {
-        return customResponse(true,res, 200, 'Frenos encontrados', allBrakes);
+        customResponse(true,res, 200, 'Frenos encontrados', allBrakes);
       }
-      return customResponse(false,res, 404, 'No se encontraron frenos', null);
+      customResponse(false,res, 404, 'No se encontraron frenos', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(res);
+      badResponse(error);
     }
   }
 
@@ -56,12 +56,12 @@ export class BrakesService {
     try {
       const brake = await this.brakeModel.findByPk(id);
       if (brake) {
-        return customResponse(true,res, 200, 'Freno encontrado', brake);
+        customResponse(true,res, 200, 'Freno encontrado', brake);
       }
-      return customResponse(false,res, 404, 'Freno no encontrado', null);
+      customResponse(false,res, 404, 'Freno no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(res);
+      badResponse(error);
     }
   }
 
@@ -77,12 +77,12 @@ export class BrakesService {
       const brake = await this.brakeModel.findByPk(id);
       if (brake) {
         await brake.update(updateBrakeDto);
-        return customResponse(true,res, 200, 'Freno actualizado', brake);
+        customResponse(true,res, 200, 'Freno actualizado', brake);
       }
-      return customResponse(false,res, 404, 'Freno no encontrado', null);
+      customResponse(false,res, 404, 'Freno no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(res);
+      badResponse(error);
     }
   }
 

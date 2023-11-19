@@ -29,14 +29,14 @@ export class ModelsService {
         },
       });
       if (existModel) {
-        return customResponse(false,res, 400, 'Modelo ya registrado', null);
+        customResponse(false,res, 400, 'Modelo ya registrado', null);
       }
       // If not exist, we create the model
       const newModel = await this.modelModel.create(createModelDto);
-      return customResponse(true,res, 201, 'Modelo creado', newModel);
+      customResponse(true,res, 201, 'Modelo creado', newModel);
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(res);
+      badResponse(error);
     }
   }
 
@@ -50,12 +50,12 @@ export class ModelsService {
       const allModels = await this.modelModel.findAll();
 
       if (allModels.length > 0) {
-        return customResponse(true, res, 200, 'Modelos encontrados', allModels);
+        customResponse(true, res, 200, 'Modelos encontrados', allModels);
       }
-      return customResponse(false, res, 404, 'No se encontraron modelos', null);
+      customResponse(false, res, 404, 'No se encontraron modelos', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(res);
+      badResponse(error);
     }
   }
 
@@ -73,11 +73,12 @@ export class ModelsService {
         },
       });
       if (model) {
-        return customResponse(true,res, 200, 'Modelo encontrado', model);
+        customResponse(true,res, 200, 'Modelo encontrado', model);
       }
-      return customResponse(false,res, 404, 'Modelo no encontrado', null);
+      customResponse(false,res, 404, 'Modelo no encontrado', null);
     } catch (error) {
-      
+      console.log('ERROR ----->', error);
+      badResponse(error);
     }
   }
 
@@ -103,12 +104,12 @@ export class ModelsService {
             id,
           },
         });
-        return customResponse(true,res, 200, 'Modelo actualizado', updatedModel);
+        customResponse(true,res, 200, 'Modelo actualizado', updatedModel);
       }
-      return customResponse(false,res, 404, 'Modelo no encontrado', null);
+      customResponse(false,res, 404, 'Modelo no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(res);
+      badResponse(error);
     }
   }
 
@@ -127,12 +128,12 @@ export class ModelsService {
       });
       if (model) {
         await model.destroy();
-        return customResponse(true,res, 200, 'Modelo eliminado', null);
+        customResponse(true,res, 200, 'Modelo eliminado', null);
       }
-      return customResponse(false,res, 404, 'Modelo no encontrado', null);
+      customResponse(false,res, 404, 'Modelo no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(res);
+      badResponse(error);
     }
   }
 
@@ -155,12 +156,12 @@ export class ModelsService {
         },
       );
       if (model) {
-        return customResponse(true,res, 200, 'Modelo encontrado', model);
+        customResponse(true,res, 200, 'Modelo encontrado', model);
       }
-      return customResponse(false,res, 404, 'Modelo no encontrado', null);
+      customResponse(false,res, 404, 'Modelo no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      return badResponse(res);
+      badResponse(error);
     }
   }
 }
