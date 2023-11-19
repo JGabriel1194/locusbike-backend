@@ -28,7 +28,7 @@ export class MailService {
       customResponse(true, res, 200, 'Se a enviado un correo de confirmación revisa tu bandeja de entrada', data);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 }

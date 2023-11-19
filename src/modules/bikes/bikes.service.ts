@@ -29,7 +29,7 @@ export class BikesService {
       customResponse(true,res, 201, 'Bicicleta creada', newBike);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -43,7 +43,7 @@ export class BikesService {
       customResponse(false, res, 404, 'No se encontraron bicicletas', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -56,7 +56,7 @@ export class BikesService {
       customResponse(false, res, 404, 'Bicicleta no encontrada', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -72,7 +72,7 @@ export class BikesService {
       customResponse(false, res, 404, 'Bicicleta no encontrada', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -88,7 +88,7 @@ export class BikesService {
       customResponse(false, res, 404, 'Bicicleta no encontrada', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 }

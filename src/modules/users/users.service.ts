@@ -43,7 +43,7 @@ export class UsersService {
       return newUser
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -61,7 +61,7 @@ export class UsersService {
       customResponse(false,res, 404,'No hay usuarios registrados', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -79,7 +79,7 @@ export class UsersService {
       customResponse(false,res, 404, 'Usuario no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -97,7 +97,7 @@ export class UsersService {
       customResponse(false,res, 404, 'Usuario no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -115,7 +115,7 @@ export class UsersService {
       customResponse(false,res, 404, 'Usuario no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -135,7 +135,7 @@ export class UsersService {
       customResponse(false,res, 404, 'Usuario no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -154,7 +154,7 @@ export class UsersService {
       customResponse(false,res, 404, 'Usuario no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -169,7 +169,7 @@ export class UsersService {
       customResponse(false,res, 404, 'Usuario no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 }

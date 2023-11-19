@@ -42,7 +42,7 @@ export class AuthService {
       const token = await this.generateJwt(res, user.id, user.userName);
       customResponse(true,res, 200, 'Login correcto', { token });
     } catch (error) {
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -81,7 +81,7 @@ export class AuthService {
       
 
     } catch (error) {
-      badResponse(error);
+      badResponse(res);
     }
   } 
 
@@ -120,9 +120,9 @@ export class AuthService {
     }
   }
 
-  async verify(token: string) {
+  async verify(res: Response,token: string) {
     try {
-      const data = await this.decodeJWT(token);
+      const data = await this.decodeJWT(res,token);
       console.log('data',data)
       const user = await this.userModel.findOne({ where: { id: data['object'].id } });
       if(!user){
@@ -133,7 +133,7 @@ export class AuthService {
       return true
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -152,7 +152,7 @@ export class AuthService {
       return token;
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -163,27 +163,27 @@ export class AuthService {
       return token;
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
-  async decodeJWT(payload: string) {
+  async decodeJWT(res: Response, payload: string) {
     try {
       const data = this.jwtService.decode(payload);
       return data;
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
-  async verifyJWT(token: string) {
+  async verifyJWT(res: Response, token: string) {
     try {
       const data = this.jwtService.verify(token);
       return data;
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 }

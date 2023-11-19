@@ -39,7 +39,7 @@ export class BrandsService {
       customResponse(true,res, 201, 'Marca creada', newBrand);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -56,7 +56,7 @@ export class BrandsService {
       customResponse(false,res, 404, 'No se encontraron marcas', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -75,7 +75,7 @@ export class BrandsService {
       customResponse(false,res, 404, 'Marca no encontrada', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -95,7 +95,7 @@ export class BrandsService {
       customResponse(false,res, 404, 'Marca no encontrada', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
     
   }

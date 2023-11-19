@@ -36,7 +36,7 @@ export class ModelsService {
       customResponse(true,res, 201, 'Modelo creado', newModel);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -55,7 +55,7 @@ export class ModelsService {
       customResponse(false, res, 404, 'No se encontraron modelos', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -78,7 +78,7 @@ export class ModelsService {
       customResponse(false,res, 404, 'Modelo no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -109,7 +109,7 @@ export class ModelsService {
       customResponse(false,res, 404, 'Modelo no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -133,7 +133,7 @@ export class ModelsService {
       customResponse(false,res, 404, 'Modelo no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -161,7 +161,7 @@ export class ModelsService {
       customResponse(false,res, 404, 'Modelo no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 }

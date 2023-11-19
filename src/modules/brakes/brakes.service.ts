@@ -25,7 +25,7 @@ export class BrakesService {
       customResponse(true,res, 201, 'Frenos creados', newBrake);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }  
   }
 
@@ -42,7 +42,7 @@ export class BrakesService {
       customResponse(false,res, 404, 'No se encontraron frenos', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -61,7 +61,7 @@ export class BrakesService {
       customResponse(false,res, 404, 'Freno no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
@@ -82,7 +82,7 @@ export class BrakesService {
       customResponse(false,res, 404, 'Freno no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(error);
+      badResponse(res);
     }
   }
 
