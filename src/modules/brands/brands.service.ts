@@ -31,15 +31,15 @@ export class BrandsService {
         },
       });
       if (existBrand) {
-        customResponse(false,res, 400, 'Marca ya registrada', null);
+        return customResponse(false,res, 400, 'Marca ya registrada', null);
       }
 
       // If not exist, we create the brand
       const newBrand = await this.brandModel.create(createBrandDto);
-      customResponse(true,res, 201, 'Marca creada', newBrand);
+      return customResponse(true,res, 201, 'Marca creada', newBrand);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 
@@ -51,12 +51,12 @@ export class BrandsService {
     try {
       const allBrands = await this.brandModel.findAll();
       if (allBrands.length > 0) {
-        customResponse(true,res, 200, 'Marcas encontradas', allBrands);
+        return customResponse(true,res, 200, 'Marcas encontradas', allBrands);
       }
       customResponse(false,res, 404, 'No se encontraron marcas', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 
@@ -70,12 +70,12 @@ export class BrandsService {
     try {
       const brand = await this.brandModel.findByPk(id);
       if (brand) {
-        customResponse(true,res, 200, 'Marca encontrada', brand);
+        return customResponse(true,res, 200, 'Marca encontrada', brand);
       }
       customResponse(false,res, 404, 'Marca no encontrada', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 
@@ -90,12 +90,12 @@ export class BrandsService {
       const brand = await this.brandModel.findByPk(id);
       if (brand) {
         await brand.update(updateBrandDto);
-        customResponse(true,res, 200, 'Marca actualizada', brand);
+        return customResponse(true,res, 200, 'Marca actualizada', brand);
       }
-      customResponse(false,res, 404, 'Marca no encontrada', null);
+      return customResponse(false,res, 404, 'Marca no encontrada', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
     
   }

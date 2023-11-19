@@ -29,7 +29,7 @@ export class UsersService {
         },
       });
       if (existUser) {
-        customResponse(false,res, 400, `El usuario con esta cédula ${existUser.userCedula} ya esta registrado`, null);
+        return customResponse(false,res, 400, `El usuario con esta cédula ${existUser.userCedula} ya esta registrado`, null);
       }
 
       // If not exist, we create the user
@@ -43,7 +43,7 @@ export class UsersService {
       return newUser
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 
@@ -56,12 +56,12 @@ export class UsersService {
       const allUsers = await this.userModel.findAll();
 
       if (allUsers.length > 0) {
-        customResponse(false,res, 200,'Usuarios encontrados', allUsers);
+        return customResponse(false,res, 200,'Usuarios encontrados', allUsers);
       }
-      customResponse(false,res, 404,'No hay usuarios registrados', null);
+      return customResponse(false,res, 404,'No hay usuarios registrados', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 
@@ -74,12 +74,12 @@ export class UsersService {
     try {
       const user = await this.userModel.findOne({ where: { id } });
       if (user) {
-        customResponse(true,res, 200, 'Usuario encontrado', user);
+        return customResponse(true,res, 200, 'Usuario encontrado', user);
       }
-      customResponse(false,res, 404, 'Usuario no encontrado', null);
+      return customResponse(false,res, 404, 'Usuario no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 
@@ -92,12 +92,12 @@ export class UsersService {
     try {
       const user = await this.userModel.findOne({ where: { userName } });
       if (user) {
-        customResponse(true,res, 200, 'Usuario encontrado', user);
+        return customResponse(true,res, 200, 'Usuario encontrado', user);
       }
-      customResponse(false,res, 404, 'Usuario no encontrado', null);
+      return customResponse(false,res, 404, 'Usuario no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 
@@ -110,12 +110,12 @@ export class UsersService {
     try {
       const user = await this.userModel.findOne({ where: { userEmail } });
       if (user) {
-        customResponse(true,res, 200, 'Usuario encontrado', user);
+        return customResponse(true,res, 200, 'Usuario encontrado', user);
       }
-      customResponse(false,res, 404, 'Usuario no encontrado', null);
+      return customResponse(false,res, 404, 'Usuario no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 
@@ -130,9 +130,9 @@ export class UsersService {
       const user = await this.userModel.findOne({ where: { id } });
       if (user) {
         await user.update(updateUserDto);
-        customResponse(true, res, 200, 'Usuario actualizado', user);
+        return customResponse(true, res, 200, 'Usuario actualizado', user);
       }
-      customResponse(false,res, 404, 'Usuario no encontrado', null);
+      return customResponse(false,res, 404, 'Usuario no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
       badResponse(res);
@@ -149,12 +149,12 @@ export class UsersService {
       const user = this.userModel.findOne({ where: { id } });
       if (user) {
         this.userModel.destroy({ where: { id } });
-        customResponse(true,res, 200, 'Usuario eliminado', null);
+        return customResponse(true,res, 200, 'Usuario eliminado', null);
       }
-      customResponse(false,res, 404, 'Usuario no encontrado', null);
+      return customResponse(false,res, 404, 'Usuario no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 
@@ -164,12 +164,12 @@ export class UsersService {
       if (user) {
         const newPassword = await hashPassword(password.password);
         await user.update({ userPassword: newPassword });
-        customResponse(true,res, 200, 'Contraseña actualizada', null);
+        return customResponse(true,res, 200, 'Contraseña actualizada', null);
       }
-      customResponse(false,res, 404, 'Usuario no encontrado', null);
+      return customResponse(false,res, 404, 'Usuario no encontrado', null);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 }

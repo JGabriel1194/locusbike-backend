@@ -49,9 +49,9 @@ export class AuthController {
   googleSignIn(@Body() googleDto: GoogleDto, @Res() res: Response) {
     return this.authService.loginGoogle(res, googleDto);
   }
+  
   @Public()
   @Get('verify/:token')
-  
   async verify(@Param('token') token: string, @Res() res: Response) {
     const verify = await this.authService.verify(res,token);
     if (verify) {

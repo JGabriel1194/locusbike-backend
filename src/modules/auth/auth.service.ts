@@ -44,9 +44,10 @@ export class AuthService {
 
       //Generate token
       const token = await this.generateJwt(res, user.id, user.userName);
-      customResponse(true,res, 200, 'Login correcto', { token });
+      return customResponse(true,res, 200, 'Login correcto', { token });
     } catch (error) {
-      badResponse(res);
+      console.log('ERROR ----->', error);
+      return badResponse(res);
     }
   }
 
@@ -83,7 +84,7 @@ export class AuthService {
       }
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   } 
 
@@ -135,7 +136,7 @@ export class AuthService {
       return true
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 
@@ -154,7 +155,7 @@ export class AuthService {
       return token;
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 
@@ -165,7 +166,7 @@ export class AuthService {
       return token;
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 
@@ -175,7 +176,7 @@ export class AuthService {
       return data;
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 
@@ -185,7 +186,7 @@ export class AuthService {
       return data;
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 }

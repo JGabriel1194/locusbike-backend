@@ -23,12 +23,12 @@ export class MailService {
         },
       });
       if (!sendMail) {
-        customResponse(false, res, 400, 'No se a podido enviar el correo de confirmación', data);
+        return customResponse(false, res, 400, 'No se a podido enviar el correo de confirmación', data);
       }
-      customResponse(true, res, 200, 'Se a enviado un correo de confirmación revisa tu bandeja de entrada', data);
+      return customResponse(true, res, 200, 'Se a enviado un correo de confirmación revisa tu bandeja de entrada', data);
     } catch (error) {
       console.log('ERROR ----->', error);
-      badResponse(res);
+      return badResponse(res);
     }
   }
 }

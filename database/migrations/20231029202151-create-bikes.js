@@ -7,67 +7,79 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       bikeSerie: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+      },
+      bikeTipe: {
+        type: Sequelize.STRING,
       },
       bikeBrand: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       bikeModel: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+      },
+      bikeDate: {
+        type: Sequelize.DATE,
       },
       bikeSize: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       bileColor: {
-        type: Sequelize.STRING
-      },
-      bikeYear: {
-        type: Sequelize.DATE
+        type: Sequelize.STRING,
       },
       bikeMaterial: {
-        type: Sequelize.STRING
-      },
-      bikeBrake: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       bikeBrakeBrand: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
-      bikeHandlebar: {
-        type: Sequelize.STRING
-      },
-      bikePotency: {
-        type: Sequelize.STRING
-      },
-      bikeTransmission: {
-        type: Sequelize.STRING
-      },
-      bikePedal: {
-        type: Sequelize.STRING
-      },
-      bikeSeat: {
-        type: Sequelize.STRING
+      bikeBrake: {
+        type: Sequelize.STRING,
       },
       bikeRing: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       bikeTire: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+      },
+      bikeTransmission: {
+        type: Sequelize.STRING,
+      },
+      bikeDesviador: {
+        type: Sequelize.STRING,
+      },
+      bikeBiela: {
+        type: Sequelize.STRING,
+      },
+      bikeFrontSuspension: {
+        type: Sequelize.STRING,
+      },
+      bikeBackSuspension: {
+        type: Sequelize.STRING,
+      },
+      bikeSeat: {
+        type: Sequelize.STRING,
+      },
+      bikeHandlebar: {
+        type: Sequelize.STRING,
+      },
+      bikePedal: {
+        type: Sequelize.STRING,
       },
       bikeState: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
