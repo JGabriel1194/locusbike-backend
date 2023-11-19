@@ -72,7 +72,7 @@ export class AuthService {
             userName: newUser.userName,
             userEmail: newUser.userEmail,
           }
-          await this.mailService.sendUserConfirmationEmail(res,sendEmail,token);
+          await this.mailService.sendUserConfirmationEmail(res,sendEmail,token,{ id: newUser.id });
         }
       }else{
         return customResponse(false,res, 400, 'No se pudo crear el usuario', null);

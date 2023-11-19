@@ -9,7 +9,7 @@ export class MailService {
 
   constructor(private mailerService: MailerService) {}
 
-  async sendUserConfirmationEmail(res: Response, createMailDto: CreateMailDto, token: string) {
+  async sendUserConfirmationEmail(res: Response, createMailDto: CreateMailDto, token: string, data: any) {
     try {
       const url = `${process.env.HOSTNAME}/auth/verify/${token}`;
 
@@ -23,9 +23,9 @@ export class MailService {
         },
       });
       if (!sendMail) {
-        return customResponse(false, res, 400, 'No se a podido enviar el correo de confirmación', null);
+        return customResponse(false, res, 400, 'No se a podido enviar el correo de confirmación', data);
       }
-      return customResponse(true, res, 200, 'Se a enviado un correo de confirmación revisa tu bandeja de entrada', null);
+      return customResponse(true, res, 200, 'Se a enviado un correo de confirmación revisa tu bandeja de entrada', data);
     } catch (error) {
       console.log('ERROR ----->', error);
       badResponse(res);

@@ -37,6 +37,7 @@ export class UsersService {
       createUserDto = {
         ...createUserDto,
         userPassword: password,
+        isActive: false,
       };
       const newUser = await this.userModel.create(createUserDto);
       return newUser
