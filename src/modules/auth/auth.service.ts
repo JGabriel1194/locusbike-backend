@@ -31,6 +31,10 @@ export class AuthService {
         return customResponse(false,res, 404, 'Usuario no encontrado', null);
       }
 
+      if(!user.isActive){
+        return customResponse(false,res, 400, 'Usuario no verificado', null);
+      }
+
       //Verify if password is correct
       const isMatch = await checkPassword(signInDto.userPassword, user.userPassword);
 
