@@ -53,7 +53,7 @@ export class AuthController {
   @Get('verify/:token')
   
   async verify(@Param('token') token: string, @Res() res: Response) {
-    const verify = await this.authService.verify(token);
+    const verify = await this.authService.verify(res,token);
     if (verify) {
       return res.render('verify', { msg: 'Usuario verificado' });
     }else{
