@@ -5,12 +5,14 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Bike } from './entities/bike.entity';
 import { badResponse, customResponse } from 'src/helpers/customResponses';
 import { Response } from 'express';
+import { Image } from '../images/entities/image.entity';
 
 @Injectable()
 export class BikesService {
 
   constructor(
     @InjectModel(Bike)
+    @InjectModel(Image)
     private bikeModel: typeof Bike,
   ) {}
   async create(res: Response,createBikeDto: CreateBikeDto) {
@@ -25,6 +27,7 @@ export class BikesService {
         return customResponse(false,res, 400, 'La serie pertenece a otra bicicleta', null);
       }
       // If not exist, we create the bike
+      
       const newBike = await this.bikeModel.create(createBikeDto);
       return customResponse(true,res, 201, 'Bicicleta creada', newBike);
     } catch (error) {
@@ -35,7 +38,16 @@ export class BikesService {
 
   async findAll(res: Response) {
     try {
-      const allBikes = await this.bikeModel.findAll();
+      const allBikes = await this.bikeModel.findAll(
+        {
+          include: [
+            {
+              model: Image,
+              as: 'images',
+            },
+          ],
+        }
+      );
 
       if (allBikes.length > 0) {
         return customResponse(true, res, 200, 'Bicicletas encontradas', allBikes);

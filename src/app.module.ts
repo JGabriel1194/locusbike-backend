@@ -8,8 +8,6 @@ import { AuthModule } from './modules/auth/auth.module';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { JwtModule } from '@nestjs/jwt';
 import { UploadsModule } from './modules/uploads/uploads.module';
-import { join } from 'path';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { BrandsModule } from './modules/brands/brands.module';
 import { ModelsModule } from './modules/models/models.module';
 import { BrakesModule } from './modules/brakes/brakes.module';

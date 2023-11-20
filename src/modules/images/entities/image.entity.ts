@@ -3,22 +3,21 @@ import { Bike } from "src/modules/bikes/entities/bike.entity";
 import { User } from "src/modules/users/entities/user.entity";
 
 @Table
-export class Image extends Model<Image>{
-    @Column
-    @ForeignKey(() => User)
-    userID: string;
+export class Image extends Model<Image> {
+  @Column
+  @ForeignKey(() => User)
+  userId: number;
 
-    @ForeignKey(() => Bike)
-    @Column
-    bikeID: string;
-    
-    @Column
-    imageType: string;
-    
-    @Column
-    imageUrl: string;
+  @Column
+  @ForeignKey(() => Bike)
+  bikeId: number;
 
-    @HasOne(()=> Bike,'id')
-    bike: Bike
+  @Column
+  imageType: string;
 
+  @Column
+  imageUrl: string;
+
+  @HasOne(() => Bike, 'id')
+  bike: Bike;
 }

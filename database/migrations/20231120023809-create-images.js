@@ -10,10 +10,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       bikeId: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       imageType: {
         type: Sequelize.STRING

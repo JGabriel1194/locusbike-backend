@@ -69,6 +69,6 @@ export class Bike extends Model<Bike> {
   @Column
   userId: number;
 
-  // @HasMany(() => Image)
-  // images: Image[];
+  @HasMany(() => Image)
+  images: Image[];
 }
