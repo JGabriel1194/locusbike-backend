@@ -19,7 +19,7 @@ export class BikesService {
       const existBike = await this.bikeModel.findOne({
         where: {
           bikeSerie: createBikeDto.bikeSerie,
-        },
+        }
       });
       if (existBike) {
         return customResponse(false,res, 400, 'La serie pertenece a otra bicicleta', null);

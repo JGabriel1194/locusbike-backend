@@ -12,7 +12,7 @@ module.exports = {
       bikeSerie: {
         type: Sequelize.STRING,
       },
-      bikeTipe: {
+      bikeType: {
         type: Sequelize.STRING,
       },
       bikeBrand: {
@@ -27,7 +27,7 @@ module.exports = {
       bikeSize: {
         type: Sequelize.STRING,
       },
-      bileColor: {
+      bikeColor: {
         type: Sequelize.STRING,
       },
       bikeMaterial: {
@@ -71,6 +71,9 @@ module.exports = {
       },
       bikeState: {
         type: Sequelize.STRING,
+      },
+      userId: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,

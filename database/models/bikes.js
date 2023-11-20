@@ -16,12 +16,12 @@ module.exports = (sequelize, DataTypes) => {
   Bikes.init(
     {
       bikeSerie: DataTypes.STRING,
-      bikeTipe: DataTypes.STRING,
+      bikeType: DataTypes.STRING,
       bikeBrand: DataTypes.STRING,
       bikeModel: DataTypes.STRING,
       bikeDate: DataTypes.DATE,
       bikeSize: DataTypes.STRING,
-      bileColor: DataTypes.STRING,
+      bikeColor: DataTypes.STRING,
       bikeMaterial: DataTypes.STRING,
       bikeBrakeBrand: DataTypes.STRING,
       bikeBrake: DataTypes.STRING,
@@ -36,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       bikeHandlebar: DataTypes.STRING,
       bikePedal: DataTypes.STRING,
       bikeState: DataTypes.STRING,
+      userId: DataTypes.INTEGER,
     },
     {
       sequelize,

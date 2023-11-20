@@ -23,6 +23,7 @@ import { TiresModule } from './modules/tires/tires.module';
 import { StatesModule } from './modules/states/states.module';
 import { BikesModule } from './modules/bikes/bikes.module';
 import { MailModule } from './modules/mail/mail.module';
+import { ImagesModule } from './modules/images/images.module';
 
 
 @Module({
@@ -72,6 +73,7 @@ import { MailModule } from './modules/mail/mail.module';
     StatesModule,
     BikesModule,
     MailModule,
+    ImagesModule,
   ],
   controllers: [AppController],
   providers: [

@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
         // If is not public, we will check if there is a token in the request
         const request = context.switchToHttp().getRequest();
         const token = this.extractTokenFromHeader(request);
-        console.log('Token---',token);
+        //console.log('Token---',token);
         
         if(!token){
             customResponse(false,request.res,401,'No estas autorizado',null);

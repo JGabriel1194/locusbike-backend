@@ -1,55 +1,74 @@
-import { Column, Model, Table } from "sequelize-typescript";
+import { Column, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
+import { Image } from 'src/modules/images/entities/image.entity';
 
 @Table
 export class Bike extends Model<Bike> {
-    @Column
-    bikeSerie: String;
+  @Column
+  bikeSerie: String;
 
-    @Column
-    bikeBrand: string;
+  @Column
+  bikeType: string;
 
-    @Column
-    bikeModel: string;
+  @Column
+  bikeBrand: string;
 
-    @Column
-    bikeSize: string;
+  @Column
+  bikeModel: string;
 
-    @Column
-    bileColor: string;
+  @Column
+  bikeDate: Date;
 
-    @Column
-    bikeYear: Date;
+  @Column
+  bikeSize: string;
 
-    @Column
-    bikeMaterial: string;
+  @Column
+  bikeColor: string;
 
-    @Column
-    bikeBrake: string;
+  @Column
+  bikeMaterial: string;
 
-    @Column
-    bikeBrakeBrand: string;
+  @Column
+  bikeBrakeBrand: string;
 
-    @Column
-    bikeHandlebar: string;
+  @Column
+  bikeBrake: string;
 
-    @Column
-    bikePotency: string;
+  @Column
+  bikeRing: string;
 
-    @Column
-    bikeTransmission: string;
+  @Column
+  bikeTire: string;
 
-    @Column
-    bikePedal: string;
+  @Column
+  bikeTransmission: string;
 
-    @Column
-    bikeSeat: string;
+  @Column
+  bikeDesviador: string;
 
-    @Column
-    bikeRing: string;
+  @Column
+  bikeBiela: string;
 
-    @Column
-    bikeTire: string;
+  @Column
+  bikeFrontSuspension: string;
 
-    @Column
-    bikeState: string;
+  @Column
+  bikeBackSuspension: string;
+
+  @Column
+  bikeSeat: string;
+
+  @Column
+  bikeHandlebar: string;
+
+  @Column
+  bikePedal: string;
+
+  @Column
+  bikeState: string;
+
+  @Column
+  userId: number;
+
+  // @HasMany(() => Image)
+  // images: Image[];
 }
