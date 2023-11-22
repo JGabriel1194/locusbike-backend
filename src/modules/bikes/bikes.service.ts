@@ -6,16 +6,16 @@ import { Bike } from './entities/bike.entity';
 import { badResponse, customResponse } from 'src/helpers/customResponses';
 import { Response } from 'express';
 import { Image } from '../images/entities/image.entity';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class BikesService {
 
   constructor(
     @InjectModel(Bike)
-    @InjectModel(Image)
-    private bikeModel: typeof Bike,
+    private bikeModel: typeof Bike
   ) {}
-  async create(res: Response,createBikeDto: CreateBikeDto) {
+  async create(res: Response,createBikeDto: CreateBikeDto, images: Array<Express.Multer.File>) {
     try {
       //verify if bike exist
       const existBike = await this.bikeModel.findOne({
@@ -27,8 +27,18 @@ export class BikesService {
         return customResponse(false,res, 400, 'La serie pertenece a otra bicicleta', null);
       }
       // If not exist, we create the bike
-      
       const newBike = await this.bikeModel.create(createBikeDto);
+      //create images
+      if(newBike && images.length > 0){
+        images.forEach(async (image) => {
+          await Image.create({
+            userId: newBike.userId,
+            bikeId: newBike.id,
+            imageType: 'bike',
+            imageUrl: `${process.env.HOSTNAME}/uploads/images/${image.filename}`,
+          });
+        });
+      }
       return customResponse(true,res, 201, 'Bicicleta creada', newBike);
     } catch (error) {
       console.log('ERROR ----->', error);
@@ -69,6 +79,23 @@ export class BikesService {
     } catch (error) {
       console.log('ERROR ----->', error);
       return badResponse(res);
+    }
+  }
+
+  async findBySerie(res: Response, serie: string){
+    try {
+      const bike = await this.bikeModel.findAll({
+        where:{
+          bikeSerie:serie
+        }        
+      })
+      if(bike){
+        return customResponse(true, res, 200,'Bicicleta encontrada',bike)
+      }
+      return customResponse(false,res,404,'Biblicleta no encontrada',null)
+    } catch (error) {
+      console.log('ERROR ------>',error);
+      return badResponse(res)
     }
   }
 

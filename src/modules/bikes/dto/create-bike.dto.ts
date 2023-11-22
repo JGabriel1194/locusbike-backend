@@ -1,6 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateBikeDto {
+  @ApiProperty({ 
+    type: 'array', 
+    items: { 
+      type: 'file', 
+      format: 'binary',
+      description: 'Imagenes de la bicicleta', 
+    }, 
+    description: 'Imagenes de la bicicleta',
+  })
+  images: any[];
+
   @ApiProperty({
     type: 'string',
     description: 'Serie',
